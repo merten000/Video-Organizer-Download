@@ -1,247 +1,235 @@
-# Video-Organizer
+# Bilder-Erzaehler
 
-Ein kleines Programm, das Videos aus einem Ordner automatisch nach einem
-Namensschema umbenennt und in einen Zielordner einsortiert. Zwei Bereiche:
+Ein kleines Programm, das aus bis zu 20 Bildern ein kurzes Video macht: die
+Bilder laufen nacheinander durch, dazu laeuft eine gesprochene Erzaehlung
+als Ton - entweder selbst getippt oder direkt von einer KI aus den Bildern
+erstellt.
 
-- **Links:** alle Bedienelemente (Quellordner, Zielordner, Namensschema, KI-Option mit Anbieter und Standbildern, Verschieben/Kopieren, "Vorschau erstellen" und "Übernehmen")
-- **Rechts:** nur die Vorschau der geplanten neuen Dateinamen/Ordner — **es wird
-  nichts verändert, bis du links auf "Übernehmen" klickst.**
-- **Oben links:** die kleinen Buttons "Werkzeuge" (Explorer-Rechtsklick-Menü) und
-  "Rechte" (Impressum, Datenschutz, Lizenz, Haftungsausschluss).
+**Dies ist eine fruehe Version (0.x) eines privaten Hobbyprojekts.** Es gibt
+KEINE Variante ganz ohne KI - das Vorlesen des Textes ist selbst schon eine
+KI-Funktion und braucht immer einen eigenen API-Key.
 
-## Was du bekommst
+## Screenshots
 
-Das Programm wird ausschließlich als **`Video-Organizer-Setup.exe`** bereitgestellt —
-ein normaler Windows-Installer mit Assistent: fragt nach dem Installationsort
-(frei wählbar, kein fester Pfad), legt eine Start-Menü- und Desktop-Verknüpfung
-an und trägt das Programm in Windows unter "Apps & Features" / "Programme und
-Features" ein. Von dort (oder über die Verknüpfung "Deinstallieren") lässt es
-sich jederzeit sauber wieder entfernen. Keine Admin-Rechte nötig, kein Python
-nötig. Eine einzelne Programmdatei, Quellcode oder Build-Dateien gehören nicht
-zum normalen Download.
+![Hauptfenster mit OpenAI](screenshots/1%20Programm%20start.PNG)
 
-## Voraussetzungen
+*Hauptfenster: KI-Anbieter und Stimme waehlen, Erzaehltext festlegen, Videoformat einstellen.*
 
-- Für das Programm selbst: nichts weiter — läuft direkt unter Windows.
-- Für die KI-Inhaltserkennung (optional, alle anderen Funktionen laufen
-  auch ganz ohne sie):
-  - **ffmpeg** — zieht die Standbilder (1 bis 3, siehe unten) aus dem Video, die die KI analysiert.
-    `Video-Organizer-Setup.exe` lädt ffmpeg bei der Installation automatisch
-    herunter (braucht dafür kurz Internet, ca. 100–150 MB) — normalerweise
-    musst du dich um nichts weiter kümmern. Falls das mal nicht klappt (z. B.
-    weil eine Firewall oder Antivirensoftware den Download blockiert — das
-    kommt vor), installiert sich das Programm trotzdem ganz normal, nur die
-    KI-Funktion bleibt dann zunächst aus. Sobald du sie das erste Mal
-    versuchst, zeigt dir das Programm selbst ein Fenster mit einem Knopf, der
-    die ffmpeg-Downloadseite öffnet, und einem zweiten Knopf, der genau den
-    Ordner öffnet, in den die zwei heruntergeladenen Dateien (`ffmpeg.exe`,
-    `ffprobe.exe`, aus dem `bin`-Unterordner des ZIPs) hineingehören.
-  - Ein API-Key **eines** der beiden KI-Anbieter, den du im Programm einträgst:
-    Anthropic (Claude) oder Google (Gemini). Den Anbieter wählst du im
-    Programm aus; für den Anbieter ohne Key wird nichts benötigt.
-  - Eine Internetverbindung während der Nutzung.
+![Google (Gemini) und Hochformat](screenshots/3%20Stimme%20und%20API%20Key%20einstellen.PNG)
 
-Ohne ffmpeg/API-Key funktioniert das Programm ganz normal weiter — die
-KI-Stufe wird dann einfach übersprungen (mit Hinweis im Statustext), alle
-anderen Namensschema-Optionen (Datum, Nummerierung, eigenes Muster) laufen
-komplett offline.
+*Mit Google (Gemini) als Anbieter und Hochformat fuer TikTok, YouTube Shorts und Reels.*
 
-**Falls die KI-Funktion trotz Häkchen und eingetragenem Key nichts tut:**
-Das Programm zeigt nach "Vorschau erstellen" jetzt ein Fenster mit dem
-genauen Grund an (ffmpeg fehlt, kein API-Key, oder die KI-Anfrage selbst ist
-fehlgeschlagen — z.B. falscher Key, kein Guthaben, kein Internet). Einfach
-den dort genannten Hinweis befolgen.
+![Bilderliste](screenshots/4%20Bilder%20Hinzugef%C3%BCgt.PNG)
+
+*Bis zu 20 Bilder in frei waehlbarer Reihenfolge.*
 
 ## Installation
 
-**Video-Organizer-Setup.exe** doppelklicken → Installations-Assistent
-öffnet sich → auf "Weiter" klicken → auf der Seite "Zielverzeichnis
-auswählen" entweder den vorgeschlagenen Ordner übernehmen oder über
-"Durchsuchen..." einen anderen Ort wählen (interne Platte, externe Platte,
-USB-Stick, egal) → "Installieren" klicken → fertig. Das Programm findest du
-danach im Startmenü und auf dem Desktop.
+`Bilder-Erzaehler-Setup.exe` doppelklicken -> Installations-Assistent ->
+Zielordner waehlen (frei waehlbar) -> Installieren. Verknuepfungen liegen
+danach im Startmenue und auf dem Desktop. Deinstallation ueber
+Windows-Einstellungen -> "Apps" -> "Bilder-Erzaehler", oder ueber die
+Verknuepfung "Deinstallieren" im Startmenue-Ordner.
 
-**Deinstallieren:** Windows-Einstellungen → "Apps" bzw. "Programme und
-Features" → "Video-Organizer" suchen → "Deinstallieren". Alternativ über
-die Verknüpfung "Deinstallieren" im Startmenü-Ordner "Video-Organizer".
+### ffmpeg (wird fuers Video-Erstellen gebraucht)
 
-## Benutzung
+Bilder-Erzaehler nutzt intern ffmpeg, um aus den Bildern + der Sprachausgabe
+das fertige Video zusammenzubauen. Damit die Setup-Datei zum Download klein
+bleibt, ist ffmpeg NICHT im Installer enthalten. Stattdessen prueft das
+Programm beim ersten Klick auf "Video erstellen ...", ob ffmpeg schon
+vorhanden ist - falls nicht, fragt es nach, ob es automatisch heruntergeladen
+und eingerichtet werden soll (einmalig, braucht eine Internetverbindung).
+Der Download ist gross (mehrere hundert Megabyte) und kann je nach
+Verbindung einige Minuten dauern; eine genaue Groessenangabe steht bewusst
+nicht in der Oberflaeche, damit sie nicht veraltet. Heruntergeladen wird
+immer genau der im Programm fest hinterlegte ffmpeg-Build (feste
+Download-Adresse), der vor der Installation ueber eine SHA-256-Pruefsumme und
+die Dateigroesse auf Echtheit geprueft wird. Klappt der Download beim
+ersten Versuch nicht (z. B. wegen eines kurzen Internet-Aussetzers), zeigt
+das Programm eine verstaendliche Fehlermeldung und man kann es beim
+naechsten Klick auf "Video erstellen ..." einfach noch einmal versuchen -
+ganz ohne selbst etwas im Explorer herunterladen oder entpacken zu muessen.
+ffmpeg wird dabei in den Installationsordner von Bilder-Erzaehler gelegt
+und nicht rechnerweit eingerichtet; das Einrichten faellt also einmalig
+pro Installation an.
 
-1. Programm starten (über Startmenü/Desktop-Verknüpfung nach der
-   Installation; ggf. Windows-Sicherheitshinweis "trotzdem ausführen"
-   bestätigen — siehe Hinweis unten).
-2. Links **Quellordner** wählen (wo deine Videos liegen).
-3. Links **Zielordner** wählen (wohin sortiert werden soll — beliebiger Pfad).
-4. Namensschema anpassen oder Standard lassen (siehe Platzhalter unten).
-5. Optional: "In Unterordner nach Datum gruppieren" aktivieren.
-6. Optional: KI-Inhaltserkennung aktivieren, Anbieter (Anthropic oder Google Gemini) wählen und den passenden API-Key eintragen.
-7. **"Vorschau erstellen"** klicken — rechts erscheint, was passieren würde.
-8. Prüfen, ob die neuen Namen/Ordner passen.
-9. **"Übernehmen"** klicken — erst jetzt werden Dateien wirklich verschoben/umbenannt (nach Sicherheitsabfrage).
+## Bedienung
 
-## Namensschema — Platzhalter
+1. Programm oeffnen.
+2. Ueber "Hinzufuegen ..." bis zu 20 Bilder auswaehlen. Mit "Nach oben"/"Nach
+   unten" laesst sich die Reihenfolge aendern, in der sie im Video zu sehen
+   sein werden - "Entfernen" nimmt ein ausgewaehltes Bild wieder raus.
+3. Oben einen KI-Anbieter auswaehlen (OpenAI oder Google), darunter eine
+   **Stimme** auswaehlen (jeder Anbieter hat mehrere zur Auswahl, mit
+   kurzem Stil-Hinweis wie "warm" oder "freundlich") und den eigenen
+   API-Key eintragen (siehe unten, wie man den bekommt). Wie natuerlich/
+   menschlich eine Stimme klingt, ist Geschmackssache - am besten ein
+   paar ausprobieren, bis eine passt.
+4. Erzaehltext festlegen - zwei Moeglichkeiten (in allen Textfeldern gibt es
+   ausserdem ein Rechtsklick-Menue mit Ausschneiden, Kopieren, Einfuegen und
+   Alles auswaehlen; Strg+C / Strg+V / Strg+X funktionieren wie gewohnt):
+   - **"Text selbst eingeben ..."**: du tippst den kompletten Text, der
+     vorgelesen werden soll.
+   - **"Text von KI aus den Bildern erstellen lassen"**: die KI schaut sich
+     die ausgewaehlten Bilder an und schlaegt selbst einen zusammenhaengenden
+     Erzaehltext vor - der laesst sich danach im selben Fenster noch
+     anpassen, bevor man ihn uebernimmt.
+5. Unter **Videoformat** das Ausgabeformat waehlen: Standard (Bildschirm,
+   1280x720, wie bisher), YouTube (16:9, 1920x1080), TikTok / YouTube Shorts /
+   Reels (9:16, 1080x1920), Instagram (Feed, 4:5, 1080x1350), Facebook
+   (Feed, 4:5, 1080x1350), WhatsApp-Status (9:16, 1080x1920) oder
+   **Benutzerdefiniert** mit eigener Breite und Hoehe (gerade Zahlen von 128
+   bis 3840). Die Bilder werden nie verzerrt, sondern proportional
+   eingepasst und bei abweichendem Seitenverhaeltnis mit Balken aufgefuellt.
+   Die Plattformen aendern ihre Empfehlungen gelegentlich; die Werte stehen
+   gesammelt in `video_profiles.py` und lassen sich dort leicht anpassen.
+6. Auf "Video erstellen ..." klicken, einen Speicherort fuer die
+   MP4-Datei waehlen und warten (kann je nach Textlaenge und Internet ein
+   paar Sekunden bis wenige Minuten dauern - der Ton wird zuerst erzeugt,
+   danach das Video zusammengebaut).
+7. Fertig - die Bilder laufen im Video automatisch gleich lang durch: die
+   Gesamtlaenge der Sprachausgabe wird dabei gleichmaessig auf die Anzahl
+   der Bilder verteilt.
 
-| Platzhalter | Bedeutung | Beispiel |
-|---|---|---|
-| `{date}` | Datum der Datei (Änderungsdatum) | `2026-08-14` |
-| `{time}` | Uhrzeit der Datei | `14-32-10` |
-| `{index}` | Fortlaufende Nummer (3-stellig) | `001` |
-| `{original}` | Ursprünglicher Dateiname ohne Endung | `IMG_0001` |
-| `{ai}` | KI-Schlagwort (nur wenn aktiviert, sonst leer) | `Sonnenuntergang-am-See_` |
-| `{ext}` | Dateiendung | `.mp4` |
+**Format des erzeugten Videos (Social Media):** Jedes neu erzeugte Video ist
+eine MP4-Datei mit H.264 (`yuv420p`, High-Profil, konstant 30 Bilder pro
+Sekunde, Qualitaetscodierung) und AAC-Ton (AAC-LC, 48 kHz, Stereo, etwa
+192 kbit/s). Die Datei ist fuer schnelles Abspielen/Hochladen vorbereitet
+(Faststart) und uebernimmt keine Metadaten der Quelldateien. Das ist der
+Standard, den TikTok, Instagram, Facebook, YouTube und WhatsApp am
+zuverlaessigsten verarbeiten. Nach dem Erzeugen prueft das Programm mit
+ffprobe, dass Video und Ton genau diesem Standard und der gewaehlten
+Aufloesung entsprechen, bevor die fertige Datei gespeichert wird. Ob eine
+Plattform das Video am Ende annimmt, haengt auch von deren eigenen Regeln
+ab (z. B. Laengen- und Groessengrenzen); die Plattformen aendern ihre
+Anforderungen gelegentlich.
 
-Standard-Schema: `{ai}{date}_{index}{ext}` → z. B. `Sonnenuntergang-am-See_2026-08-14_001.mp4`
-(ohne aktivierte KI bzw. ohne Ergebnis fällt `{ai}` einfach weg: `2026-08-14_001.mp4`)
+## API-Key besorgen (optional waehlbar, aber fuer die Sprachausgabe zwingend noetig)
 
-Die KI-Beschreibung steht bewusst **vorne** im Dateinamen — so ist beim
-Durchblättern im Explorer sofort erkennbar, was im Video zu sehen ist,
-statt nur ein Datum.
+**Bei OpenAI:**
+1. Eigenen API-Key auf [platform.openai.com](https://platform.openai.com/api-keys)
+   erstellen (eigenes Konto noetig, dort auch ein kleines Guthaben
+   hinterlegen - dafuer wird eine Visa-, Mastercard- oder Amex-Karte
+   gebraucht, Debitkarten gehen auch; die genauen aktuell akzeptierten
+   Zahlungsmethoden stehen in OpenAIs eigenen Abrechnungsbedingungen).
+   **Wichtig:** das ist ein Key von OpenAI (beginnt mit `sk-` oder
+   `sk-proj-`), nicht von Anthropic (die Keys von dort beginnen mit
+   `sk-ant-` und funktionieren hier nicht). Auch wenn man sich mit
+   demselben OpenAI-Konto einloggen kann wie bei ChatGPT: ChatGPT-Abo/
+   -Guthaben und das API-Guthaben fuer die Programmierschnittstelle werden
+   getrennt abgerechnet - ein ChatGPT-Abo allein reicht hier also nicht,
+   es braucht zusaetzlich eigenes API-Guthaben.
 
-Eigene Beispiele:
-- `Stream_{date}_{index}{ext}` → `Stream_2026-08-14_001.mp4`
-- `{ai}{original}{ext}` → `Sonnenuntergang-am-See_IMG_0001.mp4`
+**Bei Google:**
+1. Eigenen API-Key auf [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+   erstellen (eigenes Google-Konto noetig). Die hier genutzten Modelle
+   (`gemini-3.8-flash` fuers Bild-Verstehen, `gemini-3.1-flash-tts-preview`
+   fuer die Sprachausgabe) haben laut Googles eigener Preisseite (Link
+   unten) einen kostenlosen Kontingent-Anteil, allerdings mit Einschraenkungen
+   (u. a. wird der Inhalt dabei laut Google zur Produktverbesserung genutzt,
+   anders als beim kostenpflichtigen Kontingent) - fuer produktiven Einsatz
+   mit hoeheren Limits kann zusaetzlich ein Rechnungskonto mit
+   Zahlungsmethode noetig sein. Ob, in welchem Umfang und zu welchen
+   Bedingungen es kostenlose Kontingente gibt, aendert sich bei Google
+   erfahrungsgemaess gelegentlich - massgeblich ist immer der aktuelle Stand
+   auf der Google-Gemini-Preisseite (Link unten), nicht diese Beschreibung.
 
-(Wichtig: `{ai}` bringt seinen trennenden Unterstrich selbst mit, aber nur
-danach, nicht davor — darum am besten an den Anfang des Schemas setzen,
-so wie es die Standard-Vorlage macht.)
+Den Key traegst du direkt im Hauptfenster ein. Er ist dort verborgen
+(Sternchen); "Anzeigen" blendet ihn bei Bedarf ein. Ohne weiteres Zutun wird
+er nirgends gespeichert und nur fuer die jeweilige Sitzung verwendet (beim
+Neustart des Programms ist er wieder weg).
 
-Bei Namenskollisionen (zwei Dateien würden denselben Namen bekommen) hängt
-das Programm automatisch `_2`, `_3` usw. an — es wird nie eine vorhandene
-Datei überschrieben.
+**Optional: Key speichern.** Nur wenn du auf "Speichern" klickst, legt das
+Programm den Key im Windows-Anmeldeinformationsspeicher (Credential Manager)
+deines Windows-Benutzerkontos ab - nicht in einer Textdatei, JSON- oder
+INI-Datei. OpenAI und Google werden getrennt gespeichert; beim Wechsel des
+Anbieters wird dessen gespeicherter Key eingetragen. Eine Zeile unter dem
+Feld zeigt, ob fuer den gewaehlten Anbieter ein Key gespeichert ist.
+"Loeschen" entfernt den gespeicherten Key wieder. Hinweis: Andere Programme
+desselben Windows-Benutzerkontos koennen diesen Speicher grundsaetzlich
+ebenfalls auslesen. Beim Deinstallieren wirst du gefragt, ob gespeicherte
+API-Schluessel ebenfalls geloescht werden sollen (Standard: Nein).
 
-## Unterstützte Videoformate
+**Kosten:** werden direkt zwischen deinem eigenen Konto beim gewaehlten
+Anbieter und diesem Anbieter abgerechnet - nicht Teil dieses Programms. Die
+genauen Preise haengen vom gewaehlten Anbieter/Modell ab und aendern sich
+gelegentlich, aktuelle Zahlen stehen auf der
+[OpenAI-Preisseite](https://openai.com/api/pricing/) bzw. der
+[Google-Gemini-Preisseite](https://ai.google.dev/gemini-api/docs/pricing).
 
-`.mp4 .mov .mkv .avi .wmv .flv .webm .m4v .mts .ts`
+## Optionales Windows-Kontextmenue
 
-## Wichtiger Hinweis zu Windows-Warnungen
+Unter "Tools" gibt es die Einstellung "Bilder-Erzaehler im
+Windows-Kontextmenue anzeigen" (standardmaessig aus, nur in der installierten
+Version). Wenn eingeschaltet, erscheint beim Rechtsklick auf Bilddateien (PNG,
+JPG/JPEG, BMP, GIF, WEBP - nicht bei Ordnern) der Eintrag "Mit
+Bilder-Erzaehler oeffnen"; markierte Bilder werden beim Start uebernommen
+(hoechstens 20; Windows blendet den Eintrag allerdings bei mehr als 15
+markierten Dateien aus). Es werden keine Dateizuordnungen geaendert - Bilder oeffnen
+sich weiter mit ihren bisherigen Programmen. Der Eintrag liegt nur im
+eigenen Benutzerbereich der Registry (ohne Administratorrechte); beim
+Ausschalten und beim Deinstallieren werden ausschliesslich diese eigenen
+Eintraege entfernt.
 
-Weder `Video-Organizer-Setup.exe` noch das damit installierte Programm sind digital
-signiert (das kostet Geld/eine
-Firmen-Zertifizierung, die es für ein privates Tool wie dieses nicht gibt).
-Windows SmartScreen oder dein Virenscanner können deshalb beim ersten Start
-eine Warnung anzeigen ("Unbekannter Herausgeber" o. Ä.). Das ist bei
-unsignierten, selbst gebauten Programmen üblich — es ist aber KEIN Beweis
-dafür, dass die Datei sauber ist, sondern lediglich ein Hinweis, dass
-Windows die Herkunft nicht bestätigen kann. Bitte vor dem Ausführen selbst
-prüfen, statt die Warnung einfach wegzuklicken:
+## Unterstuetzte Bildformate
 
-- Nur die Datei `Video-Organizer-Setup.exe` verwenden und möglichst aus der
-  offiziellen Quelle beziehen. Die unveränderte Weitergabe durch andere ist
-  laut Lizenz erlaubt — wenn du die Datei nicht direkt von dort hast,
-  vergleiche deshalb unbedingt die Prüfsumme (nächster Punkt).
-- Falls im Release ein SHA-256-Prüfwert angegeben ist, die heruntergeladene
-  Datei damit vergleichen (z. B. mit `certutil -hashfile Video-Organizer-Setup.exe SHA256`
-  unter Windows).
+PNG, JPG/JPEG, BMP, GIF, WEBP - alles, was ueblicherweise als Foto oder
+Grafik vorliegt (bei animierten GIFs wird nur die erste Einzelbild-Ebene
+verwendet). Das Programm wandelt jedes ausgewaehlte Bild vor der weiteren
+Verarbeitung intern automatisch in ein einheitliches Format um - sowohl vor
+dem Zusammenbauen des Videos als auch, falls genutzt, vor dem Verschicken an
+die KI zum automatischen Text-Erstellen. Das sorgt dafuer, dass auch Formate
+wie BMP zuverlaessig funktionieren, selbst wenn ein einzelner KI-Anbieter
+das Ausgangsformat eigentlich nicht direkt unterstuetzen wuerde.
+Unterschiedliche Bildgroessen werden im Video automatisch passend eingepasst
+(nicht verzerrt).
 
-Erst wenn Quelle und ggf. Prüfsumme passen, die Warnung über "Weitere
-Informationen" bzw. "Trotzdem ausführen" bestätigen.
+## Hinweis zum Datenschutz
 
-## Sicherheit
+Die vollstaendige Datenschutzerklaerung steht in `DATENSCHUTZ.md` (im
+Programm unter "Datenschutz & Rechtliches"). Kurz gesagt:
 
-- Standardmäßig ist "Verschieben" ausgewählt (Originaldatei landet im
-  Zielordner, ist am alten Ort weg). Wähle "Kopieren", wenn das Original
-  am alten Ort erhalten bleiben soll.
-- Die Vorschau greift nie auf die Festplatte schreibend zu — erst
-  "Übernehmen" führt Änderungen aus, und selbst dann kommt vorher eine
-  Sicherheitsabfrage.
+Vor der ersten Uebertragung in einer Sitzung zeigt das Programm einen
+Hinweisdialog (Anbieter, Inhalt, moegliche personenbezogene Daten, Kosten)
+mit "Fortfahren" / "Abbrechen"; ohne "Fortfahren" wird nichts gesendet. Die
+Zustimmung wird nicht gespeichert.
 
-## Die KI-Inhaltserkennung: Anbieter, Kosten & eigener API-Key
+Der Entwickler erhebt keine Daten: keine Konten, kein Tracking, keine
+Statistik, keine eigene Protokolldatei. Die ausgewaehlten Bilder (nur bei
+"Text von KI ... erstellen lassen") und der Erzaehltext (immer, fuer die
+Sprachausgabe) gehen **direkt von deinem Rechner an den gewaehlten
+Anbieter - OpenAI oder Google**, zusammen mit deinem eigenen API-Key. Die
+Bilder werden vorher in ein neues PNG umgewandelt (bei sehr grossen Bildern
+verkleinert; Metadaten der Originaldatei werden nicht uebernommen). Fuer
+die weitere Verarbeitung gelten die eigenen Datenschutz-/Nutzungsbedingungen
+des Anbieters. Beim kostenlosen Google-Kontingent kann der Inhalt laut
+Google zur Produktverbesserung genutzt werden (siehe "API-Key besorgen").
 
-Die KI-Funktion ist komplett optional und hat **nichts mit deinem Claude/
-Cowork-Konto oder dessen Nutzung zu tun**. Sie braucht einen eigenen,
-separaten Zugang bei **einem** der beiden Anbieter (Auswahl im Programm):
+Der API-Key wird nur dann dauerhaft gespeichert, wenn du ausdruecklich auf
+"Speichern" klickst - dann im Windows-Anmeldeinformationsspeicher deines
+Benutzerkontos, nie in einer normalen Datei (siehe oben). Temporaere
+Arbeitsdateien werden nach dem Export wieder geloescht.
 
-**Anthropic (Claude):**
+Beim einmaligen Einrichten von ffmpeg (nur nach deiner Bestaetigung)
+verbindet sich das Programm mit GitHub (`github.com`, Weiterleitungen zu
+`githubusercontent.com`), um den hinterlegten ffmpeg-Build herunterzuladen;
+dabei wird, wie bei jedem Download, deine IP-Adresse uebermittelt. Bilder,
+Text oder Key werden dafuer nicht verschickt.
 
-1. Auf [console.anthropic.com](https://console.anthropic.com) einen Account anlegen (falls noch nicht vorhanden).
-2. Dort unter "Billing" ein kleines Guthaben aufladen (Anthropic verlangt
-   ein Mindestguthaben, oft ab 5 USD, das dann verbraucht wird — kein Abo).
-3. Unter "API Keys" einen neuen Key erstellen (eine lange Zeichenkette,
-   beginnt mit `sk-ant-...`) und kopieren.
-4. Diesen Key im Video-Organizer in das Feld unter der KI-Checkbox einfügen.
+## Hinweis zu Windows-Warnungen
 
-**Google (Gemini):**
+`Bilder-Erzaehler-Setup.exe` ist nicht digital
+signiert. Eine SmartScreen-Warnung beim ersten Start ist deshalb normal bei
+selbst gebauten Programmen wie diesem und fuer sich genommen kein Hinweis
+auf Schadsoftware - umgekehrt ist eine fehlende Signatur aber auch keine
+Garantie fuer Unbedenklichkeit. Der Quellcode ist nicht
+oeffentlich.
 
-Wichtig vorab — das regelt Google in den
-[Gemini-API-Bedingungen](https://ai.google.dev/gemini-api/terms) (Stand
-28.04.2026), bitte selbst nachlesen:
+## Rechtliche Hinweise
 
-- Gemini API und Google AI Studio sind laut Google für professionelle bzw.
-  geschäftliche Entwicklerzwecke gedacht, nicht für Verbrauchernutzung.
-- Wenn ein API-Client Nutzern im **EWR, der Schweiz oder dem Vereinigten
-  Königreich** bereitgestellt wird, dürfen laut Google **nur Paid Services**
-  verwendet werden.
-- Die Gemini API ist laut Google nur dann ein Paid Service, wenn sie über ein
-  **Cloud-Projekt mit aktivem Abrechnungskonto (Billing)** genutzt wird.
-- Laut Google musst du **mindestens 18 Jahre alt** sein, um die Gemini API
-  zu nutzen, und sie darf nicht Teil eines Programms sein, das sich an
-  unter 18-Jährige richtet oder von ihnen voraussichtlich genutzt wird. Die
-  Gemini-Funktion dieses Programms ist deshalb nur für Personen ab 18 Jahren
-  gedacht; beim Aktivieren bestätigst du das mit „OK“.
-- Für Nutzer im EWR/Schweiz/Vereinigten Königreich gelten laut Google die
-  Datenregeln der bezahlten Dienste (keine Nutzung deiner Eingaben zur
-  Produktverbesserung) auch für kostenlose Kontingente. Außerhalb dieser
-  Regionen können Eingaben in der unbezahlten Nutzung laut Google zur
-  Verbesserung von Google-Produkten verwendet werden.
-
-Wenn du in Deutschland/EWR arbeitest, nutze Gemini deshalb nur mit einem Key
-aus einem Google-Cloud-Projekt mit aktivem Billing — einen reinen
-AI-Studio-Gratis-Zugang ohne Billing richtet dieses Programm nicht ein und
-empfiehlt ihn dafür nicht. Wer das nicht möchte, nutzt stattdessen Anthropic.
-
-1. In [Google AI Studio](https://aistudio.google.com) mit einem Google-Konto anmelden.
-2. Einen Gemini-API-Key erstellen — und zwar für ein Cloud-Projekt, für das
-   Billing aktiviert ist (siehe oben).
-3. Im Video-Organizer den Anbieter "Google (Gemini)" wählen und den Key in
-   das Feld unter der KI-Checkbox einfügen.
-
-Das Programm weist dich beim Aktivieren der KI-Funktion ebenfalls auf diese
-Punkte hin. Preise und Kontingente legt Google fest und kann sie ändern.
-
-Für beide Anbieter gilt: Der Key wird nur für die laufende Sitzung im
-Arbeitsspeicher gehalten, oder — nur wenn du "Speichern" wählst — im
-Windows-Anmeldeinformations-Manager deines Rechners (getrennt je Anbieter).
-
-**Welche Bilder werden analysiert?** Das Programm zieht die Standbilder
-selbst mit ffmpeg aus dem Video — unabhängig vom gewählten Anbieter. Im
-Feld "Standbilder" stehen *Auto*, *1*, *2* und *3* zur Wahl (maximal 3):
-
-- **Auto** (Standard): Bis 30 Sekunden Länge 1 Bild aus der Mitte, bis
-  120 Sekunden 2 Bilder (bei 33 % und 66 %), darüber 3 Bilder (bei 20 %,
-  50 % und 80 %).
-- **1 / 2 / 3**: feste Anzahl, gleichmäßig über das Video verteilt.
-
-Mehrere Bilder erkennen den Inhalt besser, wenn sich ein Video verändert,
-aber es werden entsprechend mehr Bilddaten übertragen. Bei Dateien, deren
-Länge sich nicht ermitteln lässt, nimmt das Programm nur 1 Bild bei
-Sekunde 3. Es werden keine Dateinamen oder Pfade mitgeschickt.
-
-**Kosten:** Das Programm nutzt bei Anthropic bewusst das günstigste
-Claude-Modell (Haiku), bei Google ein kleines, günstiges Gemini-Modell
-(Flash-Lite). Je Video fallen bis zu 3 Bilder an, also etwas mehr als bei
-einem Bild. Die genauen, aktuellen Preise legen die Anbieter selbst fest
-(siehe deren Preisseiten, z. B.
-[anthropic.com/pricing](https://www.anthropic.com/pricing)) — schau vor
-größeren Mengen kurz dort nach oder probier es zuerst mit 1–2 Videos aus.
-
-Ohne eingetragenen Key bleibt diese Funktion einfach inaktiv (kostenlos),
-alles andere im Programm funktioniert unabhängig davon ganz normal.
-
-## Lizenz & Rechtliches
-
-Video-Organizer darf kostenlos privat und geschäftlich genutzt und
-unverändert weitergegeben werden, solange Lizenztext und Rechtehinweise
-vollständig erhalten bleiben. Veränderungen am Programm, Quellcode oder an den
-mitgelieferten Dateien sind nur nach vorheriger schriftlicher Rücksprache
-gestattet. Maßgeblich ist `LIZENZ.txt`. Nach der Installation liegen im
-Programmordner außerdem `IMPRESSUM.txt`, `DATENSCHUTZ.txt`,
-`DISCLAIMER.PDF.pdf` (Haftungsausschluss; Textfassung: `DISCLAIMER.md`),
-`THIRD-PARTY-NOTICES.md` (Drittanbieter-Hinweise) und die zugehörigen
-Lizenztexte `LICENSE-*.txt`. Die wichtigsten davon erreichst du im Programm
-über den Button „Rechte“.
-
-## Weiterentwicklung
-
-Das Programm ist bewusst als Basis gebaut ("erstmal da sein, Verbesserungen
-später"). Mögliche spätere Erweiterungen: Mehrfachauswahl mehrerer
-Quellordner, Undo-Funktion, Speichern von Voreinstellungen (inkl. API-Key).
+Zum Programm gehoeren `IMPRESSUM.md`, `DATENSCHUTZ.md`, `DISCLAIMER.md`
+(Haftungsausschluss und Nutzungshinweise) und `THIRD-PARTY-NOTICES.md`
+(Drittanbieter-Hinweise mit den beiliegenden Lizenztexten
+`LICENSE-Python.txt`, `LICENSE-Tcl-Tk.txt`, `LICENSE-Pillow.txt`,
+`LICENSE-OpenSSL.txt` und `LICENSE-PyInstaller.txt`). Im Programm sind sie unter "Datenschutz &
+Rechtliches" lesbar.
