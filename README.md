@@ -15,23 +15,23 @@ Die Setup-Datei gibt es hier auf GitHub unter **[Releases](https://github.com/me
 
 ## Screenshots
 
-![Hauptfenster](screenshots/01-hauptfenster.png)
+![Hauptfenster](screenshots/1Titelbild.PNG)
 
 *Hauptfenster: links die Einstellungen, rechts die Vorschau.*
 
-![Hinweis zur KI-Funktion](screenshots/02-ki-hinweis.png)
+![Hinweis zur KI-Funktion](screenshots/2KI%20Hinweis.PNG)
 
 *Vor der ersten Nutzung der optionalen KI-Erkennung wird erklärt, was übertragen wird.*
 
-![Vorschau mit neuen Dateinamen](screenshots/04-vorschau.png)
+![Vorschau mit neuen Dateinamen](screenshots/4Vorschau%20erstellt.PNG)
 
 *Die Vorschau zeigt alte und neue Dateinamen sowie den Zielordner. Es wird noch nichts verändert.*
 
-![Sicherheitsabfrage vor dem Übernehmen](screenshots/03-sicherheitsabfrage.png)
+![Sicherheitsabfrage vor dem Übernehmen](screenshots/3Best%C3%A4tigung.PNG)
 
 *Erst nach Klick auf „Übernehmen“ und einer Sicherheitsabfrage werden Dateien kopiert oder verschoben.*
 
-![Ergebnis im Explorer](screenshots/05-ergebnis-im-explorer.png)
+![Ergebnis im Explorer](screenshots/5Ordner%20Video.PNG)
 
 *Ergebnis: Die Videos liegen nach Datum sortiert in Unterordnern.*
 
