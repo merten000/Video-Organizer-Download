@@ -1,0 +1,93 @@
+Datenschutzerklaerung - Video-Organizer
+
+Verantwortlicher im Sinne der DSGVO:
+Martin Derdula
+Ruppinstr. 1
+15749 Mittenwalde
+Kontakt E-Mail: socialmediaprint.merten@gmail.com
+(Projekt- bzw. Auftrittsname: Merten)
+
+1. Grundsaetzliches
+Video-Organizer ist ein lokal auf deinem Rechner laufendes Programm. Es gibt
+kein Server-Backend des Autors, keine Cookies, kein Tracking und keine
+Analyse- oder Werbedienste. Durch die normale Nutzung des Programms erhaelt
+der Autor keinerlei Daten von dir. Zur Installation von ffmpeg siehe Punkt 3.
+
+2. Optionale KI-Inhaltserkennung
+Wird die KI-Funktion aktiviert, werden pro Video 1 bis 3 Standbilder (je nach
+Einstellung "Standbilder": Auto, 1, 2 oder 3) als Bilddateien an den von dir
+gewaehlten Anbieter uebertragen, um einen Namensvorschlag zu erhalten:
+- Anthropic (Claude): api.anthropic.com
+- Google (Gemini): generativelanguage.googleapis.com
+Es wird immer nur der Anbieter kontaktiert, der im Programm ausgewaehlt ist.
+Es werden dabei keine Dateinamen, Pfade oder sonstigen Metadaten
+mitgeschickt. Das vollstaendige Video wird nicht uebertragen. Die Standbilder koennen Personen, Orte oder andere
+personenbezogene Inhalte zeigen, die im Video zu sehen sind.
+
+Rechtsgrundlage: deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die vor der
+ersten Uebertragung und erneut beim ersten Wechsel des Anbieters in einer
+Sitzung eingeholt wird und jederzeit durch Ausschalten der KI-Checkbox
+widerrufen werden kann.
+
+Empfaenger je nach Auswahl:
+- Anthropic PBC (USA) als eigener Verantwortlicher fuer die Verarbeitung auf
+  ihrer Seite - es gilt deren Datenschutzerklaerung:
+  https://www.anthropic.com/legal/privacy
+- Google (Gemini API) als eigener Verantwortlicher fuer die Verarbeitung auf
+  ihrer Seite - es gelten deren Nutzungsbedingungen und Datenschutzhinweise:
+  https://ai.google.dev/gemini-api/terms
+Dabei kann eine Uebermittlung in ein Drittland (z.B. USA) stattfinden.
+
+Hinweis zu Google (Gemini API), Stand der Google-Bedingungen vom 28.04.2026:
+Laut den Gemini-API-Bedingungen ist die Nutzung von Google AI Studio und der
+Gemini API fuer professionelle oder geschaeftliche Entwicklerzwecke gedacht,
+nicht fuer Verbrauchernutzung. Wird ein API-Client Nutzern im Europaeischen
+Wirtschaftsraum (EWR), der Schweiz oder dem Vereinigten Koenigreich
+bereitgestellt, duerfen laut Google nur "Paid Services" verwendet werden. Die
+Gemini API ist laut Google nur dann ein Paid Service, wenn sie ueber ein
+Cloud-Projekt mit aktivem Abrechnungskonto genutzt wird. Fuer Nutzer im EWR, in
+der Schweiz und im Vereinigten Koenigreich gelten laut Google die
+Datenverwendungsregeln der bezahlten Dienste (keine Nutzung der Eingaben zur
+Verbesserung von Google-Produkten) auch fuer kostenlose Kontingente. Ausserhalb
+dieser Regionen koennen Eingaben in der unbezahlten Nutzung laut Google zur
+Verbesserung von Google-Produkten verwendet werden. Massgeblich sind immer die
+jeweils aktuellen Bedingungen von Google.
+Altersgrenze: Laut Google muss man mindestens 18 Jahre alt sein, um die Gemini
+API zu nutzen, und die Gemini API darf nicht Teil eines Programms sein, das sich
+an unter 18-Jaehrige richtet oder von ihnen voraussichtlich genutzt wird. Die
+Gemini-Funktion von Video-Organizer darf daher nur von Personen ab 18 Jahren
+genutzt werden; beim Aktivieren bestaetigst du das mit "OK".
+
+Speicherdauer: der Autor speichert die Standbilder nicht - wie lange der
+jeweilige Anbieter sie auf seiner Seite vorhaelt, regelt ausschliesslich
+dessen eigene Datenschutzerklaerung. Die Standbilder werden lokal nur
+voruebergehend als temporaere Dateien angelegt und danach wieder geloescht.
+
+3. ffmpeg-Download bei der Installation
+Der Installer laedt fuer die KI-Funktion das Programm ffmpeg herunter (ueber
+das mitgelieferte Skript download_ffmpeg.bat). Quelle ist das oeffentliche
+GitHub-Repository GyanD/codexffmpeg (ffmpeg-Builds von gyan.dev) auf github.com. Dafuer wird bei der
+Installation eine Verbindung zu GitHub als externem Anbieter hergestellt. Wie
+GitHub dabei technische Verbindungsdaten (z.B. die IP-Adresse) verarbeitet,
+richtet sich nach der Datenschutzerklaerung von GitHub. Der Autor erhaelt
+durch diesen Download keine Daten. Schlaegt der Download fehl, wird
+Video-Organizer trotzdem installiert; ffmpeg kann dann von Hand nachgetragen
+werden.
+
+4. API-Schluessel
+Dein eigener API-Schluessel (Anthropic bzw. Google Gemini, je Anbieter
+getrennt) bleibt ausschliesslich auf deinem Rechner: entweder nur im
+Arbeitsspeicher fuer die laufende Sitzung, oder - wenn du das ausdruecklich
+ueber "Speichern" auswaehlst - dauerhaft im Windows-Anmeldeinformations-
+Manager DEINES Rechners. Der Schluessel wird nie an den Autor uebertragen,
+geloggt oder sonst irgendwohin hochgeladen; er wird nur an den jeweils
+gewaehlten Anbieter gesendet, um die Anfrage zu authentifizieren.
+
+5. Deine Rechte
+Da der Autor selbst keine personenbezogenen Daten von dir sammelt oder
+speichert, richten sich Betroffenenrechte (Auskunft, Loeschung, Widerspruch
+usw.) bezueglich der optionalen KI-Funktion direkt an den jeweils gewaehlten
+Anbieter (Anthropic oder Google). Fragen zu
+diesem Programm selbst kannst du jederzeit an die oben genannte
+Kontakt-E-Mail richten.
+

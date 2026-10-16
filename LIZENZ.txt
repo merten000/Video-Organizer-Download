@@ -1,0 +1,16 @@
+Lizenz
+
+Copyright (c) 2026 Martin Derdula
+(Rechteinhaber und Anbieter: Martin Derdula; Projekt- bzw. Auftrittsname:
+Merten / Video-Organizer)
+
+Dieses Programm darf kostenlos heruntergeladen, installiert und genutzt werden -
+sowohl privat als auch geschaeftlich. Die unveraenderte Weitergabe (z.B. Teilen
+des Installers/der Programmdateien) ist erlaubt, solange dieser Lizenztext und
+alle Urheber-/Rechtehinweise vollstaendig erhalten bleiben.
+
+Veraenderungen am Programm, am Quellcode oder an den mitgelieferten Dateien
+(z.B. Weiterentwicklung, Uebersetzung, Einbau in ein anderes Produkt) sind nur
+nach vorheriger schriftlicher Ruecksprache mit dem Autor gestattet.
+
+Diese Lizenz raeumt keine weiteren Rechte ein, als hier ausdruecklich genannt.
