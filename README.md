@@ -13,6 +13,10 @@ Namensschema umbenennt und in einen Zielordner einsortiert. Zwei Bereiche:
 
 Die Setup-Datei gibt es hier auf GitHub unter **[Releases](https://github.com/merten000/Video-Organizer-Download/releases)** und identisch bei [SourceForge](https://sourceforge.net/projects/videoorganizerrelease/files/). Beide Stellen enthalten dieselbe `Video-Organizer-Setup.exe` samt `SHA256SUMS.txt` zum Vergleichen.
 
+## Video
+
+Kurzes Video zum Programm: [Video-Organizer auf YouTube](https://www.youtube.com/watch?v=J5zm5SfhIC4)
+
 ## Screenshots
 
 ![Hauptfenster](screenshots/1Titelbild.PNG)
